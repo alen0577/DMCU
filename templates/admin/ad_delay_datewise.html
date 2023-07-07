@@ -1,0 +1,44 @@
+
+{%extends 'admin/ad_base.html'%}
+{% load static %}
+
+{% block content %}
+<style>
+  .red {
+    color: red;
+  }
+
+  .green {
+    color: green;
+  }
+</style>
+
+<div class="row mt-5">
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table" style="width: 100%;">
+          <thead>
+            <tr>
+              <th scope="col" style="color:#6C7293;">Date</th>
+              <th scope="col" style="color:#6C7293;">Achived</th>
+              <th scope="col" style="color:#6C7293;">About To Achive</th>
+              <th scope="col" style="color:#6C7293;">Not Achived</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for delay in delays_by_date %}
+            <tr>
+              <td><a href="{% url 'ad_delay_details' hid delay.date %}" class="text-decoration-none text-white">{{ delay.date }}</a></td>
+              <td ><div class="badge badge-outline-success">{{ delay.achived }}</div></td>
+              <td><div class="badge badge-outline-warning">{{ delay.about }}</div></td>
+              <td ><div class="badge badge-outline-danger">{{ delay.not_achived }}</div></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
