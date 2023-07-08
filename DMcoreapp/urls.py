@@ -132,6 +132,8 @@ urlpatterns = [
     
     path('he_profile', views.he_profile, name='he_profile'),
     path('he_project', views.he_project, name='he_project'),
+    path('he_create_work', views.he_create_work, name='he_create_work'),
+    path('he_save_create_work', views.he_save_create_work, name='he_save_create_work'),
     path('he_view_works',views.he_view_works,name='he_view_works'),
     path('he_work_asign/<int:pk>',views.he_work_asign,name='he_work_asign'),
     path('he_daily_task',views.he_daily_task,name='he_daily_task'),

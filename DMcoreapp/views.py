@@ -3550,6 +3550,142 @@ def he_project(request):
     usr = user_registration.objects.get(id=ids)
     return render(request,'head/he_project.html',{"usr":usr})
 
+def he_create_work(request):
+    ids=request.session['userid']
+    usr = user_registration.objects.get(id=ids)
+    context={
+        "usr":usr,
+    }
+    return render(request, 'head/he_create_work.html',context)
+
+
+def he_save_create_work(request):
+    client = client_information()
+    ids=request.session['userid']
+    usr = user_registration.objects.get(id=ids)
+    
+    if request.session.has_key('userid'):
+        userid = request.session['userid']
+    else:
+       return redirect('/')
+    if request.method == 'POST':
+        client.client_name = request.POST.get('client_name')
+        
+        client.client_address = request.POST.get('client_address')
+        client.client_mail = request.POST.get('client_mail')
+        client.bs_name = request.POST.get('bs_name')
+        client.bs_website = request.POST.get('bs_website',None)
+       
+        client.bs_location = request.POST.get('bs_location')
+        client.client_files = request.FILES.get('client_files',None)
+        client.seo = request.POST.get('seo',None)
+        client.seo_txt = request.POST.get('seo_txt',None)
+        client.seo_file = request.FILES.get('seo_file',None)
+        client.seo_target = request.POST.get('seo_target',None)
+
+        client.on_pg = request.POST.get('onpage',None)
+        client.on_pg_txt = request.POST.get('on_txt',None)
+        client.on_pg_file = request.FILES.get('on_file',None)
+        client.on_pg_target = request.POST.get('on_target',None)
+
+        client.off_pg = request.POST.get('offpage',None)
+        client.off_pg_txt = request.POST.get('off_txt',None)
+        client.off_pg_file = request.FILES.get('off_file',None)
+        client.off_pg_target = request.POST.get('off_target',None)
+
+        client.smm = request.POST.get('smm',None)
+        client.smm_txt = request.POST.get('smm_txt',None)
+        client.smm_file = request.FILES.get('smm_file',None)
+        client.smm_target = request.POST.get('smm_target',None)
+        client.smo = request.POST.get('smo',None)
+        client.smo_txt = request.POST.get('smo_txt',None)
+        client.smo_file = request.FILES.get('smo_file',None)
+        client.smo_target = request.POST.get('smo_target',None)
+
+        client.sem = request.POST.get('sem',None)
+        client.sem_txt = request.POST.get('sem_txt',None)
+        client.sem_file = request.FILES.get('sem_file',None)
+        client.sem_target = request.POST.get('sem_target',None)
+        client.em = request.POST.get('em',None)
+        client.em_txt = request.POST.get('em_txt',None)
+        client.em_file = request.FILES.get('em_file',None)
+        client.em_target = request.POST.get('em_target',None)
+        client.cm = request.POST.get('cm',None)
+        client.cm_txt = request.POST.get('cm_txt',None)
+        client.cm_file = request.FILES.get('cm_file',None)
+        client.cm_target = request.POST.get('cm_target',None)
+        client.am = request.POST.get('am',None)
+        client.am_txt = request.POST.get('am_txt',None)
+        client.am_file = request.FILES.get('am_file',None)
+        client.am_target = request.POST.get('am_target',None)
+        client.mm = request.POST.get('mm',None)
+        client.mm_txt = request.POST.get('mm_txt',None)
+        client.mm_file = request.FILES.get('mm_file',None)
+        client.mm_target = request.POST.get('mm_target',None)
+        client.vm = request.POST.get('vm',None)
+        client.vm_txt = request.POST.get('vm_txt',None)
+        client.vm_file = request.FILES.get('vm_file',None)
+        client.vm_target = request.POST.get('vm_target',None)
+
+        client.lc = request.POST.get('lc',None)
+        client.lc_txt = request.POST.get('lc_txt',None)
+        client.lc_file = request.FILES.get('lc_file',None)
+        client.lc_target = request.POST.get('lc_target',None)
+
+        client.user=usr
+        client.save()
+        
+        client = client_information.objects.get(id=client.id)
+        
+        labels = request.POST.getlist('label[]')
+        text =request.POST.getlist('dis[]')
+        
+        if len(labels)==len(text):
+            mapped = zip(labels,text)
+            mapped=list(mapped)
+            for ele in mapped:
+            
+                created = addi_client_info.objects.get_or_create(labels=ele[0],discription=ele[1],user=usr,client=client,section='client_information')
+        else:
+            pass
+
+        labels2 = request.POST.getlist('label2[]')
+        text2 =request.POST.getlist('dis2[]')
+        
+        if len(labels2)==len(text2):
+            mappeds = zip(labels2,text2)
+            mappeds=list(mappeds)
+            for ele in mappeds:
+            
+                created = addi_client_info.objects.get_or_create(labels=ele[0],discription=ele[1],user=usr,client=client,section='business_details')
+        else: 
+            pass
+          
+        
+        files_req =request.FILES.getlist('file_add[]') 
+        label_req =request.POST.getlist('label_req[]')
+        dis_req =request.POST.getlist('dis_req[]') 
+        target =request.POST.getlist('target[]')
+
+        
+        if len(files_req)==len(label_req)==len(dis_req)==len(target):
+            mapped2 = zip(label_req,dis_req,files_req,target)
+            mapped2=list(mapped2)
+         
+            for ele in mapped2:
+                created = addi_client_info.objects.get_or_create(labels=ele[0],discription=ele[1],file=ele[2],target=ele[3],user=usr,client=client,section='requirments')
+
+        msg_success = "Save Successfully"
+        context={
+            "usr":usr,
+            "msg_success":msg_success,
+        }
+        return redirect("he_project") 
+        
+    return redirect("he_create_work")
+
+
+
 def he_view_works(request):
     ids=request.session['userid']
     usr = user_registration.objects.get(id=ids)
