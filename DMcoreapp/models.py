@@ -580,3 +580,13 @@ class dm_warning_mails(models.Model):
     description = models.CharField(max_length=255, null=True, blank=True)
     date=models.DateField(null=True,blank=True)
     file =models.ImageField(upload_to='images/', null=True, blank=True)
+
+
+class he_daily_work(models.Model):
+    user = models.ForeignKey(user_registration, on_delete=models.SET_NULL, null=True, blank=True)
+    cl_id = models.CharField(max_length=200,default='', null=True, blank=True)
+    date=models.DateField(auto_now_add=False, auto_now=False,  null=True, blank=True)
+    workdone=models.TextField(default='', null=True, blank=True)
+    json=models.FileField(upload_to = 'images/pdf/', null=True, blank=True,default='')
+    json_testerscreenshot = JSONField(blank=True, null=True,default='')
+

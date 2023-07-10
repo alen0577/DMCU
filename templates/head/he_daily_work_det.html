@@ -1,0 +1,128 @@
+{%extends 'head/he_base.html'%}
+{%load static%}
+{%block content%}
+
+<style>
+  .col-md-4{
+    margin-bottom: 30px;
+  }
+  .col-md-8{
+    margin-bottom: 30px;
+  }
+</style>
+
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+            <table class="table   table-bordered ">
+              <thead style="background-color: black;">
+                <tr>
+                  <th scope="col" style="color:#6C7293;">Date</th>
+                  
+                  
+                  <th scope="col" style="color:#6C7293;">Work Done</th>
+  
+                  <th scope="col" style="color:#6C7293;">Files</th>
+                  
+                  
+                  <th scope="col" style="color:#6C7293;">Action</th>
+                </tr>
+              </thead>
+  
+              <tbody>
+  
+                
+                
+                <tr>
+                  <td style="color:white;">{{dl.date}}</td>
+
+                  <td style="color:white;">{{dl.task}}
+                    
+                  </td>
+                  
+                  
+
+                  <td style="color:white;">
+                    <a href="" data-toggle="modal" data-target="#dis{{dl.id}}">
+                      <div class="badge badge-outline-info" >View Description</div>                       
+                    </a>
+                    
+                    
+                  </td>
+
+                  <td style="color:white;">
+                    {% if dl.daily_file == ""%}
+                    <div class="badge badge-outline-primary"><a style="text-decoration: none;" href="" download>No File Attached</a></div>
+                    {%else%}
+                    {% for ss in dl.json_testerscreenshot %}
+                    <div class="badge badge-outline-primary"><a style="text-decoration: none;" href="{{ ss }}" download>
+                        Download</a></div>
+                    {% endfor %}
+                  
+                    {%endif%}
+
+                    
+                  </td>
+                  
+                  
+                  <td>
+
+                    {% if dl.status == "no"%}
+                    <div class="badge badge-outline-danger">
+                      Target Not Achieved
+                    </div>
+                    {% elif dl.status == ""%}
+                    <div class="badge badge-outline-danger">
+                      Target Not Achieved
+                    </div>
+                    {% elif dl.status == "about"%}  
+                    <div class="badge badge-outline-warning">
+                      About to Achieved
+                    </div>
+                    {%else%}
+                    <div class="badge badge-outline-success">
+                      Target Achieved
+                    </div>
+                    
+              
+                    {%endif%}
+                    
+                  </td>
+                </tr>
+                
+               
+                <tr>
+                  <td style="color:white;">{{cr_date}}</td>
+  
+                  
+                 
+  
+                  <td style="color:white;" >
+                    <textarea name="workdone" class="form-control-sm bg-transparent text-light"
+                      cols="25" rows="7">
+                    </textarea> 
+  
+                  </td>
+  
+                  <td class="text-info"><input type="file" name="filed" multiple></td>
+                
+                  
+                  <td class="text-info"><button type="submit" class="btn badge-outline-primary">submit</button></td>
+                </tr>
+              </tbody>
+  
+              
+            </table>
+  
+          </div>
+  
+        </div>
+      </div>
+    </div> 
+    
+    </div>
+</form> 
+
+{%endblock content%}
+
+  
