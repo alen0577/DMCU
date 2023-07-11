@@ -1,4 +1,4 @@
-{%extends 'head/he_base.html'%}
+{%extends 'admin/ad_base.html'%}
 {%load static%}
 {%block content%}
 
@@ -11,7 +11,7 @@
   }
 </style>
 
-<form action="{% url 'he_daily_work_done' client.id %}" method="post" enctype="multipart/form-data">
+<form action="" method="post" enctype="multipart/form-data">
   {% csrf_token %}
   <div class="table-responsive">
     <table class="table  table-bordered table-dark">
@@ -45,10 +45,9 @@
           <td style="color:white;">{{i.workdone}}</td>
   
           <td style="color:white;">
-            
-            
-            
-            
+            {% if i.daily_file == ""%}
+            <div class="badge badge-outline-primary"><a style="text-decoration: none;" href="" download>No File Attached</a></div>
+            {%else%}
             {% for ss in i.json_testerscreenshot %}
             <div class="badge badge-outline-primary">
               <a style="text-decoration: none;" href="{{ ss }}" download>
@@ -57,8 +56,7 @@
             </div>
             {% endfor %}
           
-           
-            
+            {%endif%}
   
             
           </td>
@@ -76,7 +74,7 @@
         {% endfor %}
         
         
-        <tr>
+        <!-- <tr>
           <td style="color:white;">{{cr_date}}</td>
   
           
@@ -93,7 +91,9 @@
         
           
           <td class="text-info"><button type="submit" class="btn badge-outline-primary">submit</button></td>
-        </tr>
+        </tr> -->
+
+
       </tbody>
   
       

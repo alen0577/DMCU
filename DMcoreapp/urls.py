@@ -22,6 +22,7 @@ urlpatterns = [
     path('ad_create_work', views.ad_create_work, name='ad_create_work'),
     path('save_create_work', views.save_create_work, name='save_create_work'),
     path('ad_view_work', views.ad_view_work, name='ad_view_work'),
+    
     path('ad_view_clint/<int:id>', views.ad_view_clint, name='ad_view_clint'), 
     path('update_client/<int:id>', views.update_client, name='update_client'),
     path('ad_daily_work_det', views.ad_daily_work_det, name='ad_daily_work_det'),
@@ -132,14 +133,10 @@ urlpatterns = [
     
     path('he_profile', views.he_profile, name='he_profile'),
     path('he_project', views.he_project, name='he_project'),
-    path('he_create_work', views.he_create_work, name='he_create_work'),
-    path('he_save_create_work', views.he_save_create_work, name='he_save_create_work'),
+    
     path('he_view_works',views.he_view_works,name='he_view_works'),
-    path('he_view_work',views.he_view_work,name='he_view_work'),
-    path('he_view_clint/<int:id>', views.he_view_clint, name='he_view_clint'), 
-    path('he_update_client/<int:id>', views.he_update_client, name='he_update_client'),
-    path('he_daily_work_client',views.he_daily_work_client,name='he_daily_work_client'),
-    path('he_daily_work_det',views.he_daily_work_det,name='he_daily_work_det'),
+    
+    
     path('he_work_asign/<int:pk>',views.he_work_asign,name='he_work_asign'),
     path('he_daily_task',views.he_daily_task,name='he_daily_task'),
     path('he_workprogress_executive',views.he_workprogress_executive,name='he_workprogress_executive'),
@@ -311,6 +308,23 @@ urlpatterns = [
     # path('he_warning_mail/<int:eid>/<int:wid>/', views.he_warning_mail, name='he_warning_mail'),
     path('he_warning_mail/<int:eid>/', views.he_warning_mail, name='he_warning_mail'),
 
+
+#-------------------------------------------------------------------------------------------------Alen Antony--Marketing head
+
+    path('he_create_work', views.he_create_work, name='he_create_work'),
+    path('he_save_create_work', views.he_save_create_work, name='he_save_create_work'),
+    path('he_view_work',views.he_view_work,name='he_view_work'),
+    path('he_view_clint/<int:id>', views.he_view_clint, name='he_view_clint'), 
+    path('he_update_client/<int:id>', views.he_update_client, name='he_update_client'),
+    path('he_daily_work_client',views.he_daily_work_client,name='he_daily_work_client'),
+    path('he_daily_work_det/<int:pk>',views.he_daily_work_det,name='he_daily_work_det'),
+    path('he_daily_work_done/<int:pk>',views.he_daily_work_done,name='he_daily_work_done'),
+
+
+#-------------------------------------------------------------------------------------------------Alen Antony--Admin
+
+    path('ad_view_client>', views.ad_view_client, name='ad_view_client'),
+    path('ad_daily_work_head/<int:pk>',views.ad_daily_work_head,name='ad_daily_work_head'),
 
 
 ]
